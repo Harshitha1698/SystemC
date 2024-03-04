@@ -1,0 +1,51 @@
+#ifndef KPN_H
+#define KPN_H
+
+#include <systemc.h>
+
+template <class T>
+SC_MODULE(kpn)
+{
+private:
+    // ADD THINGS HERE
+    sc_fifo<T> a,b,c,d;
+    sc_out<int> e;
+
+public:
+    SC_CTOR(kpn) : a("a"),b("b"),c("c"),d("d")// : ADD THINGS HERE
+    {
+        SC_THREADS(ADD);
+        SC_THREADS(SPLIT);
+        SC_THREADS(DELAY);
+        sensitive << a.data_written_event() << b.data_written_event() << c.data_written_event() << d.data_written_event();
+        // ADD THINGS HERE
+    }
+
+    void ADD(){};
+    void SPLIT(){};
+    void DELAY(){};
+};
+
+#endif // KPN_H
+
+#include <unistd.h>
+#include <systemc.h>
+
+#include "kpn.h"
+
+
+void kpn: ADD() {
+    b.write(a.read() + c.read());
+}
+
+void kpn: SPLIT() {
+    unsigned int B = b.read();
+    a.write(B);
+    d.write(B);
+    e.write(B);
+}
+
+void kpn: DELAY() {
+    c.write(d.read());
+}
+// ADD THINGS HERE

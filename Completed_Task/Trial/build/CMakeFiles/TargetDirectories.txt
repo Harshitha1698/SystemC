@@ -1,0 +1,3 @@
+/home/harshitha/Completed_Task/Trial/build/CMakeFiles/trial.dir
+/home/harshitha/Completed_Task/Trial/build/CMakeFiles/edit_cache.dir
+/home/harshitha/Completed_Task/Trial/build/CMakeFiles/rebuild_cache.dir

@@ -1,0 +1,45 @@
+#ifndef STATE_MACHINE_H
+#define STATE_MACHINE_H
+
+#include <systemc.h>
+
+enum base {Start, G, GA, GAA, GAAG};
+// TODO
+SC_MODULE(stateMachine)
+{
+    sc_in<char> input;
+    sc_in<bool> clk;
+
+    SC_CTOR(stateMachine)
+    {
+        SC_METHOD(process);
+        sensitive << clk.pos() << input;
+        dont_initialise();
+    }
+
+    void process()
+    {
+        static base state = Start;
+
+         switch (state) {
+            case Start:
+                // Code to execute when signal is 0
+                if(input.read() == G)
+                state == G;
+                break;
+            case 1:
+                // Code to execute when signal is 1
+                break;
+            // Add more cases as needed
+
+            default:
+                // Code to execute if signal does not match any case
+                break;
+        }
+    
+        
+    }
+
+}
+
+#endif // STATE_MACHINE_H

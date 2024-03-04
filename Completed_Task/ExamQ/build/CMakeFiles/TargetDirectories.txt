@@ -1,0 +1,3 @@
+/home/harshitha/Completed_Task/ExamQ/build/CMakeFiles/examq.dir
+/home/harshitha/Completed_Task/ExamQ/build/CMakeFiles/edit_cache.dir
+/home/harshitha/Completed_Task/ExamQ/build/CMakeFiles/rebuild_cache.dir

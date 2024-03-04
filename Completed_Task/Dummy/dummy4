@@ -1,0 +1,128 @@
+#ifndef PLACE_H
+#define PLACE_H
+
+#include <systemc.h>
+
+// Place Interface:
+// TODO
+//template <class T>
+template<unsigned int Win = 1, unsigned int Wout = 1>
+class placeInterface : public sc_interface
+{
+    public:
+    // virtual void addTokens(unsigned int n) = 0;
+    // virtual void removeTokens(unsigned int n) = 0;
+    // virtual unsigned int testTokens() = 0;
+    virtual void addTokens() = 0;
+    virtual void removeTokens() = 0;
+    virtual unsigned int testTokens() = 0;
+};
+
+// Place Channel:
+// TODO
+
+template <class T>
+class placeChannel : public placeInterface<T>
+{
+    private:
+    unsigned int tokens;
+
+    public:
+    placeChannel(unsigned int size=1) : tokens(size)
+    {
+    }
+
+    void addTokens(unsigned int n){
+        tokens +=Win;
+    }
+
+    void removeTokens(unsigned int n){
+        tokens -=Wout;
+    }
+
+    int testTokens(){
+        return (tokens>Wout);
+    }
+
+};
+#endif // PLACE_H
+
+#ifndef TRANSITION_H
+#define TRANSITION_H
+
+#include <systemc.h>
+#include "place.h"
+
+// Transition:
+// TODO
+
+template<unsigned int N = 1, unsigned int M = 1>
+SC_MODULE(transition)
+{
+    sc_port< placeInterface<int> > in;
+    sc_port< placeInterface<int> > out;
+    sc_port<placeInterface, N, SC_ALL_BOUND> in;
+    sc_port<placeInterface, M, SC_ALL_BOUND> out;
+
+    void fire()
+    {
+
+        for(int i=0;i<N;i++)
+        {
+        if(in[i]->testTokens() != 0)
+        {
+            std::cout << this->name() << ": Fired" << std::endl;
+        }
+        else
+        {
+            std::cout << this->name() << ": NOT Fired" << std::endl;
+        }
+        }
+
+
+    }
+
+};
+
+#endif // TRANSITION_H
+
+
+#include <systemc.h>
+
+#include "place.h"
+#include "transition.h"
+#include "subnet.h"
+
+// Toplevel:
+// TODO
+
+int sc_main(int, char**)
+{
+    // TODO
+
+    place<T> p1,p2;
+    transition<T> t1,t2;
+    t1.in.bind("p1");
+    t1.out.bind("p2");
+    t2.in.bind("p1");
+    t2.out.bind("p2");
+
+    place<T> p1,p2,p3,p4;
+    transition<1,2> t1;
+    transition<2,1> t2;
+    transition<1,1> t3;
+
+    t1.in.bind("p1");
+    t1.out.bind("p2");
+    t1.out.bind("p3");
+
+    t3.in.bind("p3");
+    t3.out.bind("p4");
+
+    t2.in.bind("p2");
+    t2.in.bind("p4");
+    t2.out.bind("p1");
+
+    sc_start();
+    return 0;
+}

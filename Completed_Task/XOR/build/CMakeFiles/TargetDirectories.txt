@@ -1,0 +1,3 @@
+/home/harshitha/Completed_Task/XOR/build/CMakeFiles/XOR.dir
+/home/harshitha/Completed_Task/XOR/build/CMakeFiles/edit_cache.dir
+/home/harshitha/Completed_Task/XOR/build/CMakeFiles/rebuild_cache.dir

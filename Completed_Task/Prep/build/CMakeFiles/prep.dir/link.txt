@@ -1,0 +1,1 @@
+/usr/bin/c++ CMakeFiles/prep.dir/main.cpp.o -o prep  -Wl,-rpath,/opt/systemc/lib-linux64 /opt/systemc/lib-linux64/libsystemc.so 
