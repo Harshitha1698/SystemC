@@ -96,3 +96,12 @@ and then wait with the accumulated delay value wait(delay) once at the end of a 
 
 RELEVANT EXAMPLES: custom_tlm(Basic TLM-->consumer as hierarchical channel), tlm_lt_initiator_target, tlm_lt_initiator_interconnect_target, tlm_quantum_keeper, tlm_lt_dmi
 
+
+
+--------------------------------------------///TLM AT/// CHAPTER 5--------------------------------------------------------------------
+
+Base Protocol 1: Using BW PATH(4 Handshake - BEGIN_REQ;REQ_END;BEGIN_RESP;END_RESP)
+Base Protocol 2: Using Return Path (BEGIN_REQ;TLM ACCEPTED /END_REQ;BEGIN_RESP;END_RESP)
+Base Protocol 3: Skip END_REQ (BEGIN_REQ;BEGIN_RESP;END_RESP)
+Base Protocol 4: Early Completion (BEGIN_REQ;TLM_Completed)
+
